@@ -8,6 +8,7 @@ import 'buttons/raised_button.dart';
 import 'buttons/flat_button.dart';
 import 'buttons/icon_button.dart';
 import 'buttons/floating_action_button.dart';
+import 'belajar_layout/manage_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -59,7 +60,27 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('App Rudi Kurnia Al Amin_65'),
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.orange,
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            const DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.orange,
+              ),
+              child: Text(
+                'Menu Drawer',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+            _buildDrawerItem(Icons.home, 'Home', context, const HomeScreen()),
+            _buildDrawerItem(Icons.settings, 'Settings', context, const CounterApp()),
+            _buildDrawerItem(Icons.info, 'About', context, const LayoutExample()),
+            _buildDrawerItem(Icons.exit_to_app, 'Logout', context, const PageOne()),
+          ],
+        ),
       ),
       body: Center(
         child: SingleChildScrollView(
@@ -86,6 +107,43 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 30),
+
+              // Responsive Box
+              Container(
+                width: MediaQuery.of(context).size.width * 0.8,
+                height: 200,
+                color: Colors.orange,
+                child: const Center(
+                  child: Text(
+                    'Responsive Box',
+                    style: TextStyle(color: Colors.white, fontSize: 24),
+                  ),
+                ),
+              ),
+
+              const SizedBox(height: 30),
+
+              // Box Model yang ditambahkan
+              Center(
+                child: Container(
+                  width: 250,
+                  height: 100,
+                  padding: const EdgeInsets.all(16),
+                  margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+                  decoration: BoxDecoration(
+                    color: Colors.orange,
+                    border: Border.all(color: Colors.black, width: 2),
+                  ),
+                  child: const Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'Box Model',
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                  ),
+                ),
+              ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -118,6 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildNavigationButton(context, 'Floating Action Button', Colors.orange, const FloatingActionButtonDemo()),
               _buildNavigationButton(context, 'Cupertino Button', Colors.orange, const CupertinoButtonScreen()),
               _buildNavigationButton(context, 'Custom Gesture', Colors.orange, const CustomGestureScreen()),
+              _buildNavigationButton(context, 'Manage Widget', Colors.orange, const ManageWidget()),
             ],
           ),
         ),
@@ -188,6 +247,16 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         child: Text(title),
       ),
+    );
+  }
+
+  Widget _buildDrawerItem(IconData icon, String title, BuildContext context, Widget targetPage) {
+    return ListTile(
+      leading: Icon(icon),
+      title: Text(title),
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => targetPage));
+      },
     );
   }
 }
