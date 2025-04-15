@@ -1,50 +1,32 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Stack Widget Demo',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Stack Widget'),
-          backgroundColor: Colors.green,
-        ),
-        body: Center(
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Container(
-                width: 200,
-                height: 200,
-                color: Colors.green,
-              ),
-              const Text(
-                'Di Atas Kotak',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
-              const Positioned(
-                right: 8, // jarak dari kanan
-                bottom: 8, // jarak dari bawah
-                child: Icon(
-                  Icons.star,
-                  color: Colors.yellow,
-                  size: 30,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+const MyApp({super.key});
+@override
+Widget build(BuildContext context) {
+return MaterialApp(
+title: 'Card Widget Demo',
+home: Scaffold(
+appBar: AppBar(
+title: const Text('Card Widget'),
+backgroundColor: Colors.teal,
+),
+body: Center(
+child: Card(
+elevation: 4,
+margin: const EdgeInsets.all(16),
+child: ListTile(
+leading: const Icon(Icons.person),
+title: const Text('Nama Mahasiswa'),
+subtitle: const Text('Teknik Informatika'),
+),
+),
+),
+),
+);
+}
 }
