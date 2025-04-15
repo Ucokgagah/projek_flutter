@@ -9,6 +9,8 @@ import 'buttons/flat_button.dart';
 import 'buttons/icon_button.dart';
 import 'buttons/floating_action_button.dart';
 import 'belajar_layout/manage_widget.dart';
+import 'jobsheet_5/home_with_drawer.dart';
+import 'jobsheet_5/tab_navigation.dart';
 
 void main() {
   runApp(const MyApp());
@@ -167,6 +169,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               const SizedBox(height: 40),
+
+              // Navigasi tombol
               _buildNavigationButton(context, 'Go to Page One', Colors.orange, const PageOne()),
               _buildNavigationButton(context, 'Go to Counter App', Colors.orange, const CounterApp()),
               _buildNavigationButton(context, 'Go to Layout Example', Colors.orange, const LayoutExample()),
@@ -177,6 +181,10 @@ class _HomeScreenState extends State<HomeScreen> {
               _buildNavigationButton(context, 'Cupertino Button', Colors.orange, const CupertinoButtonScreen()),
               _buildNavigationButton(context, 'Custom Gesture', Colors.orange, const CustomGestureScreen()),
               _buildNavigationButton(context, 'Manage Widget', Colors.orange, const ManageWidget()),
+
+              // ✅ Tambahan baru
+              _buildNavigationButton(context, 'Home with Drawer', Colors.orange, const HomeWithDrawer()),
+              _buildNavigationButton(context, 'Tab Navigation', Colors.orange, TabNavigation()),
             ],
           ),
         ),
