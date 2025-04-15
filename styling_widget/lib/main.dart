@@ -18,7 +18,7 @@ Widget build(BuildContext context) {
         ),
 body: const Center(
   child: Text(
-    'Hello Rudi Kurnia Al Amin',
+    'Hello Rudi Kurnia Al Amin 65',
     style: TextStyle(
       fontSize: 24,
       fontWeight: FontWeight.bold,
