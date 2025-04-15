@@ -22,8 +22,9 @@ body: const Center(
     style: TextStyle(
       fontSize: 24,
       fontWeight: FontWeight.bold,
-      color: Colors.blue,
+      color: Colors.red,
       decoration: TextDecoration.underline,
+      fontStyle: FontStyle.italic
       ),
       ),
       ),
