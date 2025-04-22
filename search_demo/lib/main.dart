@@ -19,13 +19,21 @@ class MyApp extends StatelessWidget {
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 
-  @override // perbaikan dari @overide
+  @override
   State<SearchPage> createState() => _SearchPageState();
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final List<String> _item = ['Pemograman Sistem Bergerak', 'Statistik', 'Kalkulus', 'Fisika', 'Agama'];
+  final List<String> _item = [
+    'Pemograman Sistem Bergerak',
+    'Statistik',
+    'Kalkulus',
+    'Fisika',
+    'Agama'
+  ];
+
   String _query = '';
+  final TextEditingController _newItemController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +43,15 @@ class _SearchPageState extends State<SearchPage> {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Search View')),
-      body: Column( // perbaikan dari column()
+      body: Column(
         children: [
-          Padding( // perbaikan dari padding()
+          Padding(
             padding: const EdgeInsets.all(16),
             child: TextField(
               decoration: const InputDecoration(
                 labelText: 'Search...',
                 border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.search), // perbaikan dari Icons.Search
+                prefixIcon: Icon(Icons.search),
               ),
               onChanged: (value) {
                 setState(() {
@@ -52,11 +60,41 @@ class _SearchPageState extends State<SearchPage> {
               },
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _newItemController,
+                    decoration: const InputDecoration(
+                      labelText: 'Tambahkan Mata Kuliah',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                ElevatedButton(
+                  onPressed: () {
+                    String newItem = _newItemController.text.trim();
+                    if (newItem.isNotEmpty) {
+                      setState(() {
+                        _item.add(newItem);
+                        _newItemController.clear();
+                      });
+                    }
+                  },
+                  child: const Text('Tambah'),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
               itemCount: filteredItems.length,
-              itemBuilder: (context, index) { // perbaikan dari itembuilder
-                return ListTile( // perbaikan dari ListTitle
+              itemBuilder: (context, index) {
+                return ListTile(
                   title: Text(filteredItems[index]),
                 );
               },
