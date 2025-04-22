@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -10,97 +8,41 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Halaman Search Mata Kuliah',
-      home: const SearchPage(),
+      title: 'Halaman NestedScrollView',
+      home: const NestedScrollExample(),
     );
   }
 }
 
-class SearchPage extends StatefulWidget {
-  const SearchPage({super.key});
-
-  @override
-  State<SearchPage> createState() => _SearchPageState();
-}
-
-class _SearchPageState extends State<SearchPage> {
-  final List<String> _item = [
-    'Pemograman Sistem Bergerak',
-    'Statistik',
-    'Kalkulus',
-    'Fisika',
-    'Agama'
-  ];
-
-  String _query = '';
-  final TextEditingController _newItemController = TextEditingController();
+class NestedScrollExample extends StatelessWidget {
+  const NestedScrollExample({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final filteredItems = _item
-        .where((item) => item.toLowerCase().contains(_query.toLowerCase()))
-        .toList();
-
     return Scaffold(
-      appBar: AppBar(title: const Text('Search View')),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: TextField(
-              decoration: const InputDecoration(
-                labelText: 'Search...',
-                border: OutlineInputBorder(),
-                prefixIcon: Icon(Icons.search),
+      body: NestedScrollView(
+        headerSliverBuilder: (context, innerBoxIsScrolled) {
+          return [
+            SliverAppBar(
+              expandedHeight: 200.0,
+              floating: false,
+              pinned: true,
+              flexibleSpace: FlexibleSpaceBar(
+                title: const Text('NestedScrollview'),
+                background: Image.network(
+                  'https://nawabineka.com/wp-content/uploads/2025/04/Coding-Ist.jpg',
+                  fit: BoxFit.cover,
+                ),
               ),
-              onChanged: (value) {
-                setState(() {
-                  _query = value;
-                });
-              },
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _newItemController,
-                    decoration: const InputDecoration(
-                      labelText: 'Tambahkan Mata Kuliah',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: () {
-                    String newItem = _newItemController.text.trim();
-                    if (newItem.isNotEmpty) {
-                      setState(() {
-                        _item.add(newItem);
-                        _newItemController.clear();
-                      });
-                    }
-                  },
-                  child: const Text('Tambah'),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 10),
-          Expanded(
-            child: ListView.builder(
-              itemCount: filteredItems.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(filteredItems[index]),
-                );
-              },
-            ),
-          ),
-        ],
+          ];
+        },
+        body: ListView.builder(
+          itemCount: 20,
+          itemBuilder: (context, index) {
+            return ListTile(title: Text('Item ${index + 1}'));
+          },
+        ),
       ),
     );
   }
